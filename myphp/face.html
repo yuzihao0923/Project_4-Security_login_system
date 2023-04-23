@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+
+    <video id='video' width='320' height='240' autoplay></video>
+    <canvas id="canvas" width='320' height='240'></canvas>
+
+    <div id="footer_button">
+
+        <input type="text" id="input1" name="my-input" placeholder="last" disabled>
+        <button id="btn_start">start</button>
+        <button id="btn_capture">capture</button>
+        <button id="btn_compare">compare</button>
+
+    </div>
+
+    <script>
+
+        let URL = window.location.href
+        function getUrlParams2(url) {
+            let urlStr = url.split('?')[1]
+            const urlSearchParams = new URLSearchParams(urlStr)
+            const result = Object.fromEntries(urlSearchParams.entries())
+            return result
+        }
+        console.log(getUrlParams2(URL).username);
+        let name = getUrlParams2(URL).username;
+        console.log(name);
+        document.getElementById('input1').value = name;
+
+
+
+        // var value1 = localStorage.getItem("value1");
+        // var input2 = document.querySelector("#my-input");
+        // input2.placeholder = value1;
+        // console.log(value1);
+
+        var video = document.getElementById('video')
+        var canvas = document.getElementById('canvas')
+        document.getElementById('btn_start').addEventListener('click', async function () {
+
+            let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            video.srcObject = stream
+        })
+
+        function capture_img() {
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height)
+            let image_data = canvas.toDataURL('image/jpeg')
+
+            // let a = document.createElement('a');
+            // a.download = "image";
+            // a.href = canvas.toDataURL('image/png');
+            // a.click();
+            //E:/Project_4/picture/
+
+
+            const link = document.createElement('a');
+            let loginname = name
+            link.href = image_data;
+            link.download = loginname + '.jpg';
+            link.click();
+
+            // console.log(image_data)
+            alert("Downloads successfully!")
+        }
+
+        document.getElementById('btn_capture').addEventListener('click', function () {
+            capture_img()
+        })
+
+
+
+        document.getElementById('btn_compare').addEventListener('click', function () {
+            capture_img()
+            let loginName = document.getElementById('input1').value
+
+            fetch('http://127.0.0.1:5000/?user=' + loginName,
+                { mode: "no-cors" })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    let pred = data.prediction;
+
+                    if (pred > '30') {
+                        alert("Login successfully!");
+                        window.location.href = "welcome.html";
+                    } else {
+                        alert("Try again")
+                    }
+                })
+                .catch(error => console.error('Fetch error:', error));
+
+
+        })
+            // http://127.0.0.1:5000/?user=first
+            // action="percentage.php" method="post"
+
+    </script>
+
+</body>
+
+</html>

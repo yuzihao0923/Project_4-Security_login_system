@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--    <resource src="{{ url_for('static',filename='login_html.css') }}"></resource>-->
+    <link rel="stylesheet" href="login.css" />
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>××××× Company</h1>
+    </header>
+
+    <main>
+        <form class="login" action="login.php" method="post" style="width: 750px;">
+            <div id="username">
+                <div id="user">Username: <input type="text" id="loginname1" name="username"></div>
+            </div>
+
+            <div id="password">
+                <div id="pass">Password: <input type="text" id="pd" name="password"></div>
+            </div>
+
+            <div id="button_login" method="post">
+
+
+                <button id="button_1" type="submit">Login!</button>
+
+            </div>
+
+
+        </form>
+
+
+
+        <form class="img_path" action="update_address.php" method="post">
+
+            <div id="username">
+                <div id="user">Username: <input type="text" id="loginname" name="username"></div>
+            </div>
+
+            <div id="password">
+                <div id="pass">Password: <input type="text" id="pd" name="password"></div>
+            </div>
+
+
+            <div id="imgurl">
+                <div id="url">Img URL: <input type="text" id="pathname" name="img_url"></div>
+            </div>
+
+            <div id="button_submit" method="post">
+
+                <button id="button_3" type="submit">Update Img Path!</button>
+
+            </div>
+
+        </form>
+
+
+        <form class="registeration" action="reg.php" method="post">
+            <div id="username3">
+                <div id="user">Username: <input type="text" id="name" name="username"></div>
+            </div>
+
+            <div id="password">
+                <div id="pass">Password: <input type="text" id="pd" name="password"></div>
+            </div>
+
+            <div id="button_regist" method="post">
+
+                <button id="button_2" type="submit">Regiest!</button>
+
+            </div>
+
+        </form>
+
+
+    </main>
+
+
+    <footer>
+
+    </footer>
+    <!-- <video id='video' width='320' height='240' autoplay></video>
+    <canvas id="canvas" width='320' height='240'></canvas>
+
+    <div id="footer_button">
+
+        <button id="btn_start">start</button>
+        <button id="btn_capture">capture</button>
+        <button id="btn_compare">compare</button>
+
+    </div> -->
+
+    <script>
+
+        var input1 = document.querySelector("#loginname1");
+        var value1 = input1.value;
+        console.log('123456',value1);
+        localStorage.setItem("value1", value1);
+        var name = value1;
+       
+
+    //     var video = document.getElementById('video')
+    //     var canvas = document.getElementById('canvas')
+    //     document.getElementById('btn_start').addEventListener('click', async function () {
+
+    //         let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    //         video.srcObject = stream
+    //     })
+
+    //     function capture_img() {
+    //         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height)
+    //         let image_data = canvas.toDataURL('image/jpeg')
+
+    //         // let a = document.createElement('a');
+    //         // a.download = "image";
+    //         // a.href = canvas.toDataURL('image/png');
+    //         // a.click();
+    //         //E:/Project_4/picture/
+
+
+    //         const link = document.createElement('a');
+    //         let loginname = document.getElementById('loginname1').value
+    //         link.href = image_data;
+    //         link.download = loginname + '.jpg';
+    //         link.click();
+
+    //         // console.log(image_data)
+    //         alert(image_data)
+    //     }
+
+    //     document.getElementById('btn_capture').addEventListener('click', function () {
+    //         capture_img()
+    //     })
+
+
+
+    //     document.getElementById('btn_compare').addEventListener('click', function () {
+    //         capture_img()
+    //         let loginName = document.getElementById('loginname1').value
+
+
+    //         fetch('http://127.0.0.1:5000/?user=' + loginName,
+    //             { mode: "no-cors" })
+    //             .then(response => {
+    //                 if (!response.ok) {
+    //                     throw new Error('Network response was not ok');
+    //                 }
+    //                 return response.json();
+    //             })
+    //             .then(data => {
+    //                 console.log(data);
+    //                 let pred = data.prediction;
+
+    //                 if (pred > '30') {
+    //                     alert("successful");
+    //                     window.location.href = "welcome.html";
+    //                 } else {
+    //                     alert("Try again")
+    //                 }
+    //             })
+    //             .catch(error => console.error('Fetch error:', error));
+
+
+    //     })
+    //         // http://127.0.0.1:5000/?user=first
+    //         // action="percentage.php" method="post"
+
+    // </script>
+
+</body>
+
+</html>
